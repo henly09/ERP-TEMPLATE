@@ -9,16 +9,16 @@
             <!-- Sidebar content goes here -->
             <ul class="py-4 flex-1">
                 <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-gray-600">
-                    <a href="#" class="text-black group-hover:text-white">Home</a>
+                    <a href="{{ route('dashboard') }}" class="text-black group-hover:text-white">Dashboard</a>
                 </li>
                 <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-gray-600">
-                    <a href="#" class="text-black group-hover:text-white">About</a>
+                    <a href="{{ route('about') }}" class="text-black group-hover:text-white">About</a>
                 </li>
                 <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-gray-600">
-                    <a href="#" class="text-black group-hover:text-white">Services</a>
+                    <a href="{{ route('services') }}" class="text-black group-hover:text-white">Services</a>
                 </li>
                 <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-gray-600">
-                    <a href="#" class="text-black group-hover:text-white">Contact</a>
+                    <a href="{{ route('contact') }}" class="text-black group-hover:text-white">Contact</a>
                 </li>
             </ul>
         </div>
