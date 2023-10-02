@@ -2,24 +2,32 @@
         <aside class="bg-gray-200 dark:bg-gray-700 w-64 min-h-screen flex flex-col relative" id="sidebar">
         <div class="py-4 text-center">
             <img src="{{ asset('images/dummylogo.png') }}" alt="Profile Picture" class="bg-white mx-auto h-24 w-24">
-            <div class="pt-5 text-xl">Companie's Name</div>
+            <div class="text-white pt-5 text-xl">Companie's Name</div>
         </div>
         <!-- Sidebar content container -->
         <div class="flex flex-col flex-1">
             <!-- Sidebar content goes here -->
             <ul class="py-4 flex-1">
-                <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-gray-600">
-                    <a href="{{ route('dashboard') }}" class="text-black group-hover:text-white">Dashboard</a>
-                </li>
-                <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-gray-600">
-                    <a href="{{ route('about') }}" class="text-black group-hover:text-white">About</a>
-                </li>
-                <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-gray-600">
-                    <a href="{{ route('services') }}" class="text-black group-hover:text-white">Services</a>
-                </li>
-                <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-gray-600">
-                    <a href="{{ route('contact') }}" class="text-black group-hover:text-white">Contact</a>
-                </li>
+                <a href="{{ route('dashboard') }}">
+                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-white">
+                        <span class="text-white group-hover:text-black">Dashboard</span>
+                    </li>
+                </a>
+                <a href="{{ route('about') }}">
+                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-white">
+                        <span class="text-white group-hover:text-black">About</span>
+                    </li>
+                </a>
+                <a href="{{ route('services') }}">
+                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-white">
+                        <span class="text-white group-hover:text-black">Services</span>
+                    </li>
+                </a>
+                <a href="{{ route('contact') }}">
+                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-white">
+                        <span class="text-white group-hover:text-black">Contact</span>
+                    </li>
+                </a>
             </ul>
         </div>
 
@@ -88,7 +96,7 @@
         </div>
 
 
-    <script>
+<script>
         document.addEventListener("DOMContentLoaded", function() {
             const toggleButton = document.getElementById("toggleButton");
             const sidebar = document.getElementById("sidebar");
@@ -99,6 +107,10 @@
                 content.classList.toggle("w-full");
             });
         });
+
+        function navigateTo(url) {
+            window.location.href = url;
+        }
 </script>
     <style>
         /* Add transition properties for opacity and transform */
