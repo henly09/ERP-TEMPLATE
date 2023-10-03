@@ -1,38 +1,37 @@
 <div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
         <aside class="bg-gray-200 dark:bg-gray-700 w-64 min-h-screen flex flex-col relative" id="sidebar">
-        <div class="py-4 text-center">
-            <img src="{{ asset('images/dummylogo.png') }}" alt="Profile Picture" class="bg-white mx-auto h-24 w-24">
-            <div class="text-white pt-5 text-xl">Companie's Name</div>
+        <div class="pt-5 pb-5 text-center">
+            <img src="{{ asset('images/dahlia.png') }}" alt="Profile Picture" class="mx-auto" style="height: 115px; weight: 145px;">
         </div>
         <!-- Sidebar content container -->
         <div class="flex flex-col flex-1">
             <!-- Sidebar content goes here -->
             <ul class="py-4 flex-1">
                 <a href="{{ route('dashboard') }}">
-                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-white">
-                        <span class="text-white group-hover:text-black"> <i class="fa-solid fa-chart-line pr-3"></i> Dashboard</span>
+                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-gray-600">
+                        <span class="text-black group-hover:text-white"> <i class="fa-solid fa-chart-line pr-3"></i> Dashboard </span>
                     </li>
                 </a>
-                <a href="{{ route('about') }}">
-                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-white">
-                        <span class="text-white group-hover:text-black"> <i class="fa-solid fa-circle-info pr-3"></i> About</span>
+                <a href="{{ route('customer.index') }}">
+                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-gray-600">
+                        <span class="text-black group-hover:text-white"> <i class="fa-solid fa-circle-info pr-3"></i> Customers </span>
                     </li>
                 </a>
-                <a href="{{ route('services') }}">
-                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-white">
-                        <span class="text-white group-hover:text-black"> <i class="fa-solid fa-briefcase pr-3"></i> Services</span>
+                <a href="{{ route('vouchreq.index') }}">
+                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-gray-600">
+                        <span class="text-black group-hover:text-white"> <i class="fa-solid fa-briefcase pr-3"></i> Voucher Request </span>
                     </li>
                 </a>
-                <a href="{{ route('contact') }}">
-                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-white">
-                        <span class="text-white group-hover:text-black"> <i class="fa-solid fa-phone pr-3"></i> Contact</span>
+                <a href="{{ route('disbursement.index') }}">
+                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-gray-600">
+                        <span class="text-black group-hover:text-white"> <i class="fa-solid fa-phone pr-3"></i> Disbursement </span>
                     </li>
                 </a>
             </ul>
         </div>
 
         <!-- Sidebar Footer (Fixed at Bottom) -->
-        <div class="bg-gray-600 py-2 pt-5 pb-5 text-white text-center">
+        <div class="bg-gray-600 py-2 pt-3 pb-3 text-white text-center">
             &copy; 2023 Montera™
         </div>
     </aside>
@@ -65,17 +64,16 @@
 
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('profile.edit')">
-                                    {{ __('Profile') }}
+                                <i class="fa-solid fa-user pr-3" style="color: green"></i>{{ __('Profile') }}
                                 </x-dropdown-link>
 
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-
                                     <x-dropdown-link :href="route('logout')"
                                             onclick="event.preventDefault();
                                                         this.closest('form').submit();">
-                                        {{ __('Log Out') }}
+                                        <i class="fa-solid fa-right-from-bracket pr-3" style="color: red"></i>{{ __('Log Out') }}
                                     </x-dropdown-link>
                                 </form>
                             </x-slot>
@@ -94,8 +92,6 @@
         </div>
             </div>
         </div>
-
-
 <script>
         document.addEventListener("DOMContentLoaded", function() {
             const toggleButton = document.getElementById("toggleButton");
@@ -107,10 +103,6 @@
                 content.classList.toggle("w-full");
             });
         });
-
-        function navigateTo(url) {
-            window.location.href = url;
-        }
 </script>
     <style>
         /* Add transition properties for opacity and transform */
