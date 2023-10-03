@@ -10,22 +10,22 @@
             <ul class="py-4 flex-1">
                 <a href="{{ route('dashboard') }}">
                     <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-white">
-                        <span class="text-white group-hover:text-black">Dashboard</span>
+                        <span class="text-white group-hover:text-black"> <i class="fa-solid fa-chart-line pr-3"></i> Dashboard</span>
                     </li>
                 </a>
                 <a href="{{ route('about') }}">
                     <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-white">
-                        <span class="text-white group-hover:text-black">About</span>
+                        <span class="text-white group-hover:text-black"> <i class="fa-solid fa-circle-info pr-3"></i> About</span>
                     </li>
                 </a>
                 <a href="{{ route('services') }}">
                     <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-white">
-                        <span class="text-white group-hover:text-black">Services</span>
+                        <span class="text-white group-hover:text-black"> <i class="fa-solid fa-briefcase pr-3"></i> Services</span>
                     </li>
                 </a>
                 <a href="{{ route('contact') }}">
                     <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-white">
-                        <span class="text-white group-hover:text-black">Contact</span>
+                        <span class="text-white group-hover:text-black"> <i class="fa-solid fa-phone pr-3"></i> Contact</span>
                     </li>
                 </a>
             </ul>
