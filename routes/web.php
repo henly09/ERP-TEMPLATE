@@ -28,6 +28,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
+    Route::get('/generate-pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdfgen1');; // PDF Generator 1
+
     Route::get('/customer/index', [App\Http\Controllers\CustomersController::class, 'index'])->name('customer.index');
     Route::get('/customer/create', [App\Http\Controllers\CustomersController::class, 'create'])->name('customer.create');
     Route::get('/customer/read', [App\Http\Controllers\CustomersController::class, 'read'])->name('customer.read');

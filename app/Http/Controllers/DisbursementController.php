@@ -22,6 +22,10 @@ class DisbursementController extends Controller
         // Delete Function Only
     }
 
+    public function search(){
+        // Search Function Only
+    }
+
     public function update(){
         return view('pages.disbursement.edit');
     }

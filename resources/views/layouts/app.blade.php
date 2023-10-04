@@ -60,6 +60,9 @@
         <!-- App js -->
         <script src="{{ asset('js/theme.js') }}"></script>
 
+        <!-- PDF Viewer -->
+        <script src="{{ asset('pdfjs-3.11.174-dist/build/pdf.js') }}"></script>
+
         <!-- Scripts -->
         @vite([
             'resources/css/app.css', 

@@ -195,6 +195,7 @@
                 </div><!-- end col-->
             </div>
             <!-- end row-->
+            <div id="pdf-viewer"></div>                                 
     </div>
 
     <script>
@@ -215,6 +216,32 @@
        info: false,  
     });
 });
+
+        // Path to your PDF file
+        var pdfPath = "{{ asset('IT_Assistant.pdf') }}";
+
+        // Initialize PDF.js
+        pdfjsLib.getDocument(pdfPath).promise.then(function(pdf) {
+            // Create a canvas element to render the PDF
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
+            document.getElementById('pdf-viewer').appendChild(canvas);
+
+            // Load the first page
+            pdf.getPage(1).then(function(page) {
+                var viewport = page.getViewport({ scale: 1.0 });
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                // Render the page on the canvas
+                page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                });
+            });
+        });
+
+    
 
 </script>
 
