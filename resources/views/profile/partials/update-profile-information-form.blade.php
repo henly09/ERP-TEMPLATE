@@ -13,39 +13,47 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6"  enctype="multipart/form-data">
         @csrf
         @method('patch')
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
-
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
+        <div class="flex space-x-4">
+            <div class="w-1/2">
+                <div class="mb-4">
+                    <x-input-label for="name" :value="__('Name')" />
+                    <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+                    <x-input-error class="mt-2" :messages="$errors->get('name')" />
                 </div>
-            @endif
+
+                <div class="mb-4">
+                    <x-input-label for="email" :value="__('Email')" />
+                    <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+                    <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                </div>
+            </div>
+
+            <div class="w-1/2 flex flex-col items-center justify-center">
+                    <div class="relative h-40 w-40 bg-white overflow-hidden">
+                        <div class="relative rounded-circle h-40 w-40 bg-white border-2 overflow-hidden">
+                        @if($user->prof_pic)
+                            <img src="{{ asset('storage/profile_pictures/' . $user->prof_pic) }}" alt="Profile Picture" class="object-cover w-full h-full">
+                        @else
+                            <img src="{{ asset('images/dummyuser.png') }}" alt="Default Profile Picture" class="object-cover w-full h-full">
+                        @endif
+                            </div>
+                                <label class="absolute bottom-0 right-0 p-1 bg-gray-900 text-gray-100 rounded-circle cursor-pointer hover:bg-gray-800 transition duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg>
+                                    <input id="prof_pic" name="prof_pic" type="file" class="hidden" accept="image/*">
+                                </label>
+                    </div>
+                <x-input-error class="mt-2" :messages="$errors->get('prof_pic')" />
+            </div>
+
         </div>
+
+
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
@@ -61,4 +69,20 @@
             @endif
         </div>
     </form>
+
+    <script>
+        const input = document.getElementById('prof_pic');
+        const image = document.querySelector('.rounded-circle img');
+
+        input.addEventListener('change', () => {
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            image.src = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+        });
+    </script>
 </section>

@@ -14,21 +14,21 @@
                         <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
                                     <!-- Search Bar -->
-                                    <form class="form-inline my-2 my-lg-0 flex-fill" method="GET" action="">
+                                    <form class="form-inline my-2 my-lg-0 flex-fill" method="GET" action="{{ route('customer.search') }}">
                                     @csrf
                                         <div class="form-group flex-fill">
-                                            <input type="text" name="search" class="form-control flex-fill" placeholder="Search customers...">
+                                            <input value="{{ isset($queried) ? $queried : null }}" type="text" name="search" class="form-control flex-fill rounded-lg" placeholder="Search customers...">
                                         </div>
-                                        <button onclick="#" class="bg-blue-500 text-white font-bold py-2.5 px-4 ml-2 rounded">
+                                        <button type="submit" class="bg-blue-500 text-white font-bold py-2.5 px-4 ml-2 rounded-lg">
                                             <i class="fa-solid fa-eye"></i> Search
                                         </button>
                                     </form>
 
-                                    <a href="#" class="btn btn-primary mb-0 font-size-14 ml-5 py-2.5"><i class="feather-plus"></i> Add Customer</a>
+                                    <a href="{{ route('customer.create') }}" class="btn btn-primary mb-0 font-size-14 ml-5 py-2.5"><i class="feather-plus"></i> Add Customer</a>
                                 </div>
                             </div>
-                            
-                            <table id="basic-datatable"class="table table-hover mb-0 dt-responsive nowrap">
+                            <!-- dt-responsive put in class for options -->
+                            <table id="basic-datatable"class="table table-hover mb-0  nowrap">
                             <thead class="text-center align-middle">
                                 <tr>
                                     <th>Customer ID</th>
@@ -64,12 +64,12 @@
                                         <td class="text-center align-middle">
                                             <div class="button-container">
                                             <div class="modal fade" id="myModal{{ $customer->id }}">
-                                                <div class="modal-dialog">
+                                                <div class="modal-dialog modal-xl modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <!-- Modal Header -->
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Customer Information</h4>
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h2 class="modal-title text-2xl font-bold">Customer Information</h4>
+                                                            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                                                         </div>
                                                         
                                                         <!-- Modal body -->
@@ -128,7 +128,7 @@
                                                                         </table>
                                                                     </div> <!-- end table-responsive-->
                                                                     <div class="d-flex justify-content-end mt-3 ">
-                                                                    <a href="" class="btn btn-primary mb-0 font-size-14">
+                                                                    <a href="{{ route('vouchreq.create', ['id' => $customer->id]) }}" class="btn btn-primary mb-0 font-size-14">
                                                                         <i class="feather-plus"></i> Request Voucher
                                                                     </a>
                                                                 </div>
@@ -147,42 +147,28 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <div class="flex justify-between">
+                                            <form action="{{ route('customer.update', ['id' => $customer->id]) }}" method="GET">
+                                                @csrf
+                                                <button type="submit" class="bg-green-500 text-white font-bold py-2 px-4 rounded">
+                                                    <i class="fa-solid fa-pencil"></i>
+                                                </button>
+                                            </form>
 
-
-                                        <button onclick="navigateToRoute('{{ route('customer.read') }}')" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </button>
-                                        <button onclick="navigateToRoute('{{ route('customer.update') }}')" class="bg-green-500 text-white font-bold py-2 px-4 rounded">
-                                            <i class="fa-solid fa-pencil"></i>
-                                        </button>
-                                        <form action="{{ route('customer.delete') }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded">
-                                            <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        </form>
+                                            <form action="{{ route('customer.delete', ['id' => $customer->id]) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded">
+                                                <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                             </div>
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
-                                <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="customerModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="customerModalLabel">Customer Details</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- The data will be displayed here -->
-                                                <div id="customerDetails"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </table>
                             <!-- Search Results -->
                             @if($customers->count() > 0)
@@ -195,31 +181,32 @@
                 </div><!-- end col-->
             </div>
             <!-- end row-->
-            <div id="pdf-viewer"></div>                                 
+            <!-- // Not Done Yet   -->
+            <!-- <div id="pdf-viewer"></div>                                -->
     </div>
 
     <script>
-    function navigateToRoute(url) {
-        window.location.href = url; // Replace with the actual route or URL
-    }
-    $(document).ready(function() {
-    // Check if the DataTable is already initialized
-    if ($.fn.DataTable.isDataTable('#basic-datatable')) {
-        // If it is initialized, destroy it first
-        $('#basic-datatable').DataTable().destroy();
-    }
+        function navigateToRoute(url) {
+            window.location.href = url; // Replace with the actual route or URL
+        }
 
-    // Now, reinitialize the DataTable with the desired options
-    $('#basic-datatable').DataTable({
-        searching: false, // Disable search
-        paging: false,    // Disable pagination
-       info: false,  
-    });
-});
+        $(document).ready(function() {
+            // Check if the DataTable is already initialized
+            if ($.fn.DataTable.isDataTable('#basic-datatable')) {
+                // If it is initialized, destroy it first
+                $('#basic-datatable').DataTable().destroy();
+            }
+
+            // Now, reinitialize the DataTable with the desired options
+            $('#basic-datatable').DataTable({
+                searching: false, // Disable search
+                paging: false,    // Disable pagination
+                info: false,  
+            });
+        });
 
         // Path to your PDF file
         var pdfPath = "{{ asset('IT_Assistant.pdf') }}";
-
         // Initialize PDF.js
         pdfjsLib.getDocument(pdfPath).promise.then(function(pdf) {
             // Create a canvas element to render the PDF
@@ -240,9 +227,6 @@
                 });
             });
         });
-
-    
-
 </script>
 
 

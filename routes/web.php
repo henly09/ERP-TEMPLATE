@@ -28,20 +28,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/generate-pdf', [App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdfgen1');; // PDF Generator 1
-
     Route::get('/customer/index', [App\Http\Controllers\CustomersController::class, 'index'])->name('customer.index');
-    Route::get('/customer/create', [App\Http\Controllers\CustomersController::class, 'create'])->name('customer.create');
-    Route::get('/customer/read', [App\Http\Controllers\CustomersController::class, 'read'])->name('customer.read');
-    Route::get('/customer/delete', [App\Http\Controllers\CustomersController::class, 'delete'])->name('customer.delete');
-    Route::get('/customer/update', [App\Http\Controllers\CustomersController::class, 'update'])->name('customer.update');
+    Route::get('/customer/create', [App\Http\Controllers\CustomersController::class, 'create'])->name('customer.create'); // create page
+    Route::post('/customer/createSave', [App\Http\Controllers\CustomersController::class, 'createSave'])->name('customer.createSave'); // save function from create customers
+    Route::delete('/customer/delete/{id}', [App\Http\Controllers\CustomersController::class, 'delete'])->name('customer.delete'); // delete function in customers
+    Route::get('/customer/update/{id}', [App\Http\Controllers\CustomersController::class, 'update'])->name('customer.update'); // update page
+    Route::patch('/customer/saveEdit/{id}', [App\Http\Controllers\CustomersController::class, 'saveEdit'])->name('customer.saveEdit'); // save function from edit customers
+    Route::get('/customer/search', [App\Http\Controllers\CustomersController::class, 'search'])->name('customer.search');
 
     Route::get('/vouchreq/index', [App\Http\Controllers\VouchReqController::class, 'index'])->name('vouchreq.index');
-    Route::get('/vouchreq/create', [App\Http\Controllers\VouchReqController::class, 'create'])->name('vouchreq.create');
-    Route::get('/vouchreq/read', [App\Http\Controllers\VouchReqController::class, 'read'])->name('vouchreq.read');
-    Route::get('/vouchreq/delete', [App\Http\Controllers\VouchReqController::class, 'delete'])->name('vouchreq.delete');
-    Route::get('/vouchreq/update', [App\Http\Controllers\VouchReqController::class, 'update'])->name('vouchreq.update');
-
+    Route::get('/vouchreq/create/{id?}', [App\Http\Controllers\VouchReqController::class, 'create'])->name('vouchreq.create');
+    Route::post('/vouchreq/createSave', [App\Http\Controllers\VouchReqController::class, 'createSave'])->name('vouchreq.createSave'); // save function from create vouuchreq
+    Route::delete('/vouchreq/delete/{id}', [App\Http\Controllers\VouchReqController::class, 'delete'])->name('vouchreq.delete'); // delete function in vouuchreq
+    Route::get('/vouchreq/update/{id}', [App\Http\Controllers\VouchReqController::class, 'update'])->name('vouchreq.update'); // update page 
+    Route::patch('/customer/saveEdit/{id}', [App\Http\Controllers\VouchReqController::class, 'saveEdit'])->name('vouchreq.saveEdit'); // save function from edit vouuchreq
+    Route::get('/vouchreq/search', [App\Http\Controllers\VouchReqController::class, 'search'])->name('vouchreq.search');
+    Route::get('/generate-pdf/{id}', [App\Http\Controllers\PDFController::class, 'generatePDFVoucherRequest'])->name('vouchreq.GenPDF'); // PDF Generator 1
+    
     Route::get('/disbursement/index', [App\Http\Controllers\DisbursementController::class, 'index'])->name('disbursement.index');
     Route::get('/disbursement/create', [App\Http\Controllers\DisbursementController::class, 'create'])->name('disbursement.create');
     Route::get('/disbursement/read', [App\Http\Controllers\DisbursementController::class, 'read'])->name('disbursement.read');

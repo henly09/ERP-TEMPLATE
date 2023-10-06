@@ -9,10 +9,9 @@ use Carbon\Carbon;
 
 class PDFController extends Controller
 {
-    public function generatePDF()
+    public function generatePDFVoucherRequest($id){
 
-    {
-        $vouchreqs = Vouchreqs::get();
+        $vouchreqs = Vouchreqs::find($id);
 
         $data = [
 
