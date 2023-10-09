@@ -20,7 +20,7 @@
                                             <input value="{{ isset($queried) ? $queried : null }}" type="text" name="search" class="form-control flex-fill rounded-lg" placeholder="Search customers...">
                                         </div>
                                         <button type="submit" class="bg-blue-500 text-white font-bold py-2.5 px-4 ml-2 rounded-lg">
-                                            <i class="fa-solid fa-eye"></i> Search
+                                        <i class="fa-solid fa-magnifying-glass"></i>Search
                                         </button>
                                     </form>
 
@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <!-- dt-responsive put in class for options -->
-                            <table id="basic-datatable"class="table table-hover mb-0  nowrap">
+                            <table id="basic-datatable"class="table table-hover mb-0 nowrap">
                             <thead class="text-center align-middle">
                                 <tr>
                                     <th>Customer ID</th>
@@ -148,7 +148,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="flex justify-between">
+                                        <div class="flex justify-around">
                                             <form action="{{ route('customer.update', ['id' => $customer->id]) }}" method="GET">
                                                 @csrf
                                                 <button type="submit" class="bg-green-500 text-white font-bold py-2 px-4 rounded">
@@ -182,7 +182,7 @@
             </div>
             <!-- end row-->
             <!-- // Not Done Yet   -->
-            <!-- <div id="pdf-viewer"></div>                                -->
+                                         
     </div>
 
     <script>
@@ -205,28 +205,6 @@
             });
         });
 
-        // Path to your PDF file
-        var pdfPath = "{{ asset('IT_Assistant.pdf') }}";
-        // Initialize PDF.js
-        pdfjsLib.getDocument(pdfPath).promise.then(function(pdf) {
-            // Create a canvas element to render the PDF
-            var canvas = document.createElement('canvas');
-            var context = canvas.getContext('2d');
-            document.getElementById('pdf-viewer').appendChild(canvas);
-
-            // Load the first page
-            pdf.getPage(1).then(function(page) {
-                var viewport = page.getViewport({ scale: 1.0 });
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
-
-                // Render the page on the canvas
-                page.render({
-                    canvasContext: context,
-                    viewport: viewport
-                });
-            });
-        });
 </script>
 
 

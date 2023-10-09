@@ -30,28 +30,22 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
-            'prof_pic' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate the image upload
+            'prof_pic' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
         $user = $request->user();
 
-            // Check if the user already has a profile picture
         if ($user->prof_pic) {
-            // Delete the old profile picture
             Storage::disk('public')->delete('profile_pictures/' . $user->prof_pic);
         }
     
-        // Handle image upload and storage
         if ($request->hasFile('prof_pic')) {
             $image = $request->file('prof_pic');
             $imageFileName = time() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('public/profile_pictures', $imageFileName); // Store in the "public" disk
-    
-            // Update the user's profile picture column
             $user->prof_pic = $imageFileName;
         }
     
-        // Update other user attributes
         $user->name = $request->input('name');
         $user->email = $request->input('email');
     

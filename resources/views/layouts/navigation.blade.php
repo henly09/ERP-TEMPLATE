@@ -7,26 +7,37 @@
         <div class="flex flex-col flex-1">
             <!-- Sidebar content goes here -->
             <ul class="py-4 flex-1">
-                <a href="{{ route('dashboard') }}">
-                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
-                        <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-chart-line pr-3"></i> Dashboard </span>
-                    </li>
-                </a>
-                <a href="{{ route('customer.index') }}">
-                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
-                        <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-circle-info pr-3"></i> Customers </span>
-                    </li>
-                </a>
-                <a href="{{ route('vouchreq.index') }}">
-                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
-                        <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-briefcase pr-3"></i> Voucher Request </span>
-                    </li>
-                </a>
-                <a href="{{ route('disbursement.index') }}">
-                    <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
-                        <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-phone pr-3"></i> Disbursement </span>
-                    </li>
-                </a>
+            @if(Auth::user()->email_verified_at)
+            @auth
+                @if(Auth::user()->role == "Admin")
+                    <a href="{{ route('systemUsers.index') }}">
+                        <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
+                            <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-screwdriver-wrench pr-3"></i></i> System's Users </span>
+                        </li>
+                    </a>
+                @endif
+            @endauth
+            <a href="{{ route('dashboard') }}">
+                <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
+                    <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-chart-line pr-3"></i> Dashboard </span>
+                </li>
+            </a>
+            <a href="{{ route('customer.index') }}">
+                <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
+                    <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-cart-shopping pr-3"></i></i> Customers </span>
+                </li>
+            </a>
+            <a href="{{ route('vouchreq.index') }}">
+                <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
+                    <span class="text-black group-hover:text-white text-lg"> <i class="fa-regular fa-money-bill-1 pr-3"></i></i> Voucher Request </span>
+                </li>
+            </a>
+            <a href="{{ route('disbursement.index') }}">
+                <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
+                    <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-magnifying-glass-dollar pr-3"></i> Disbursement </span>
+                </li>
+            </a>
+            @endif
             </ul>
         </div>
 
