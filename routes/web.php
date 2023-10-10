@@ -27,7 +27,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-
+    
+    Route::get('/NeedVerification', function() { return view('pages.user');});
 
     Route::get('/systemUsers/index', [App\Http\Controllers\SystemsUserController::class, 'index'])->name('systemUsers.index');
     Route::get('/systemUsers/create', [App\Http\Controllers\SystemsUserController::class, 'create'])->name('systemUsers.create');

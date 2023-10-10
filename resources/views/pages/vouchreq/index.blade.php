@@ -25,7 +25,7 @@
                      </div>
                   </div>
                   <!-- dt-responsive put in class for options -->
-                  <table id="basic-datatable"class="table table-hover mb-0  nowrap">
+                  <table id="basic-datatable"class="table table-hover mb-0 nowrap">
                      <thead class="text-center align-middle">
                         <tr>
                            <th>VouchReq ID</th>
@@ -34,7 +34,7 @@
                            <th>Requested By</th>
                            <th>Checked By</th>
                            <th>Comments</th>
-                           <th>Customer Name</th>
+                           <th>Customer's Name</th>
                            <th>Status</th>
                            <th>Action</th>
                         </tr>
@@ -50,25 +50,17 @@
                            $vouchreq->requested_by,
                            $vouchreq->check_by,
                            $vouchreq->comments,
+                           $vouchreq->name,
+                           $vouchreq->status,
                            ];
                            @endphp
+
                            @foreach ($fields as $field)
-                           @php
-                           $class = ($field === $vouchreq->id) ? 'w-2' : 'w-64'; 
-                           @endphp
-                           <td class="text-wrap {{ $class }}" data-toggle="modal" data-target="#myModal{{ $vouchreq->id }}">{{ $field }}</td>
-                           @endforeach
-                           <!-- Display related customer data -->
-                           @php
-                           $customer = $customers->where('id', $vouchreq->cust_id)->first();
-                           @endphp
-                           @if ($customer)
-                           <td data-toggle="modal" data-target="#myModal{{ $vouchreq->id }}">{{ $customer->name }}</td>
-                           <td data-toggle="modal" data-target="#myModal{{ $vouchreq->id }}">{{ $customer->status }}</td>
-                           @else
-                           <td class="text-center align-middle">Customer Not Found</td>
-                           <td class="text-center align-middle">N/A</td>
-                           @endif
+                              @php
+                              $class = ($field === $vouchreq->id) ? 'w-2' : 'w-64'; 
+                              @endphp
+                           <td data-route="{{ route('vouchreq.Laraview', ['id' => $vouchreq->id]) }}" class="vouchreq-row text-wrap {{ $class }} align-middle text-center" data-toggle="modal" data-target="#myModal{{ $vouchreq->id }}">{{ $field }}</td>
+                              @endforeach
                            <td class="text-center align-middle">
                               <div class="button-container">
                                  <div class="modal fade" id="myModal{{ $vouchreq->id }}">
@@ -103,13 +95,7 @@
                                                                   </tr>
                                                                   <tr>
                                                                      <th class="text-nowrap" scope="row">Customer Name</th>
-                                                                     <td>
-                                                                        @if ($customer)
-                                                                        {{$customer->name}}
-                                                                        @else
-                                                                        Customer Not Found
-                                                                        @endif
-                                                                     </td>
+                                                                     <td>{{ $vouchreq->name }}</td>
                                                                   </tr>
                                                                   <tr>
                                                                      <th class="text-nowrap" scope="row">Particulars:</th>
@@ -129,13 +115,7 @@
                                                                   </tr>
                                                                   <tr>
                                                                      <th class="text-nowrap" scope="row">Status</th>
-                                                                     <td>
-                                                                        @if ($customer)
-                                                                        {{$customer->status}}
-                                                                        @else
-                                                                        N/A
-                                                                        @endif
-                                                                     </td>
+                                                                     <td>{{ $vouchreq->status }}</td>
                                                                   </tr>
                                                                   <tr>
                                                                      <th class="text-nowrap" scope="row">Comments:</th>
@@ -154,13 +134,13 @@
                                                          </div>
                                                          <!-- slot for pdf viewer -->
                                                          <div class="relative w-full flex items-center justify-center">
-                                                            <div id="loadingMessage" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                                            <div class="loadingMessage absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                                                 <div
                                                                 data-te-loading-icon-ref
                                                                 class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent motion-reduce:animate-[spin_1.5s_linear_infinite]"
                                                                 role="status"></div>
                                                             </div>
-                                                            <iframe id="myIframe" src="{{ route('vouchreq.Laraview', ['id' => $vouchreq->id]) }}" width="800px" height="500px"></iframe>
+                                                            <iframe class="myIframe" width="800px" height="500px"></iframe>
                                                         </div>
                                                       </div>
                                                       <div class="d-flex justify-content-end mt-3 ">
@@ -222,35 +202,49 @@
       <!-- // Not Done Yet   -->
    </div>
    <script>
-      function navigateToRoute(url) {
-          window.location.href = url; // Replace with the actual route or URL
-      }
       
       $(document).ready(function() {
-          // Check if the DataTable is already initialized
-          if ($.fn.DataTable.isDataTable('#basic-datatable')) {
-              // If it is initialized, destroy it first
-              $('#basic-datatable').DataTable().destroy();
-          }
-      
-          // Now, reinitialize the DataTable with the desired options
-          $('#basic-datatable').DataTable({
-              searching: false, // Disable search
-              paging: false,    // Disable pagination
-              info: false,  
-          });
+         var loadingMessages = $('.loadingMessage');
+         var iframes = $('.myIframe');
+
+         // When a vouchreq-row is clicked
+         $('.vouchreq-row').on('click', function() {
+            var vouchreqRoute = $(this).data('route');
+
+            // Set the src of the corresponding iframe
+            var iframe = $(this).closest('tr').find('.myIframe');
+            iframe.attr('src', vouchreqRoute);
+
+            // Show the loading message for the specific iframe
+            loadingMessages.hide();
+            $(this).closest('tr').find('.loadingMessage').show();
+         });
+
+         iframes.on('load', function() {
+            console.log('An iframe has finished loading.');
+            // Hide the loading message for the specific iframe
+            $(this).closest('tr').find('.loadingMessage').hide();
+         });
       });
 
-      $(document).ready(function() {
-        var loadingMessage = document.getElementById('loadingMessage');
-        var iframe = document.getElementById('myIframe');
 
-        $(iframe).on('load', function() {
-            console.log('The iframe has finished loading.');
-            $(loadingMessage).hide();
-            $(iframe).show();
+
+      //////////////////////////////// PDF PROBLEM
+
+      $(document).ready(function() {
+            // Check if the DataTable is already initialized
+            if ($.fn.DataTable.isDataTable('#basic-datatable')) {
+                // If it is initialized, destroy it first
+                $('#basic-datatable').DataTable().destroy();
+            }
+
+            // Now, reinitialize the DataTable with the desired options
+            $('#basic-datatable').DataTable({
+                searching: false, // Disable search
+                paging: false,    // Disable pagination
+                info: false,  
+            });
         });
-    });
       
 
    </script>

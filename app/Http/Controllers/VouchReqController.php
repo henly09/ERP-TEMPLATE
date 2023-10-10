@@ -9,9 +9,30 @@ class VouchReqController extends Controller
 {
         public function index(){
 
-            $vouchreqs = Vouchreqs::paginate(10); // You can adjust the number of records per page (e.g., 10)
-            $customers = Customers::get();
-            return view('pages.vouchreq.index',['vouchreqs' => $vouchreqs, 'customers' => $customers]);
+        // Paginate the Vouchreqs table
+        $vouchreqs = Vouchreqs::paginate(10);
+
+        // Get the customer IDs from the paginated Vouchreqs
+        $customerIds = $vouchreqs->pluck('cust_id')->toArray();
+
+        // Query the Customers table to retrieve the name and status columns
+        $customersData = Customers::whereIn('id', $customerIds)
+            ->select('id', 'name', 'status')
+            ->get();
+
+        // Loop through the paginated Vouchreqs data
+        $vouchreqs->each(function ($vouchreq) use ($customersData) {
+            // Find the corresponding customer data by matching cust_id and id
+            $customer = $customersData->where('id', $vouchreq->cust_id)->first();
+
+            // If a matching customer is found, add the name and status to the vouchreq data
+            if ($customer) {
+                $vouchreq->name = $customer->name;
+                $vouchreq->status = $customer->status;
+            }
+        });
+
+        return view('pages.vouchreq.index',['vouchreqs' => $vouchreqs]);
 
         }
 
@@ -63,10 +84,28 @@ class VouchReqController extends Controller
                              ->orWhere('particulars', 'like', '%' . $query . '%')
                              ->paginate(10);
 
-        $customers = Customers::get();
- 
+          // Get the customer IDs from the paginated Vouchreqs
+          $customerIds = $vouchreqs->pluck('cust_id')->toArray();
+  
+          // Query the Customers table to retrieve the name and status columns
+          $customersData = Customers::whereIn('id', $customerIds)
+              ->select('id', 'name', 'status')
+              ->get();
+  
+          // Loop through the paginated Vouchreqs data
+          $vouchreqs->each(function ($vouchreq) use ($customersData) {
+              // Find the corresponding customer data by matching cust_id and id
+              $customer = $customersData->where('id', $vouchreq->cust_id)->first();
+  
+              // If a matching customer is found, add the name and status to the vouchreq data
+              if ($customer) {
+                  $vouchreq->name = $customer->name;
+                  $vouchreq->status = $customer->status;
+              }
+          });
+  
          // Return the search results to a view or do something else with the results
-         return view('pages.vouchreq.index', ['vouchreqs' => $vouchreqs,'customers' => $customers,'queried' => $query]);
+         return view('pages.vouchreq.index', ['vouchreqs' => $vouchreqs, 'queried' => $query]);
     }
 
     public function update($id){

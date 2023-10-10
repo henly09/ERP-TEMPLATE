@@ -80,6 +80,28 @@ class SystemsUserController extends Controller
 
     }
 
+    public function Admin($id){
+        
+        $user = User::findOrFail($id);
+        $data = [
+            'role' => "Admin",
+        ];
+        $user->update($data);
+        return redirect()->action([SystemsUserController::class, 'index']);
+
+    }
+
+    public function UnAdmin($id){
+        
+        $user = User::findOrFail($id);
+        $data = [
+            'role' => "User",
+        ];
+        $user->update($data);
+        return redirect()->action([SystemsUserController::class, 'index']);
+
+    }
+
     public function search(Request $request){
         // Retrieve the search query from the request
         $query = $request->input('search');
