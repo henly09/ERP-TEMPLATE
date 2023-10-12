@@ -165,7 +165,7 @@
                                                 </button>
                                             </form>
                                         <!-- {{ route('customer.delete', ['id' => $disbursement->id]) }} -->
-                                            <form action="" method="POST">
+                                            <form action="{{ route('disbursement.delete' , ['id' => $disbursement->id]) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded">

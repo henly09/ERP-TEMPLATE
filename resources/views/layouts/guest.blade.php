@@ -24,15 +24,15 @@
                <div class="max-w-7xl mx-auto p-6 lg:p-8">
                   <header class="flex justify-between items-center">
                      <h1 class="transition ease-in-out delay-150 font-semibold text-8xl  text-white dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                        TEMPLATE-ERP
+                        DAHLIA-CB-ERP
                      </h1>
                   </header>
                   <main class="mt-8">
                      <h2 class="font-bold text-3xl  text-white">
-                        Streamline your business operations with TEMPLATE-ERP
+                        Streamline your business operations with DAHLIA-CB-ERP
                      </h2>
                      <p class="mt-4  text-white  ">
-                        TEMPLATE-ERP is a cloud-based ERP solution that helps businesses of all sizes automate and streamline their operations. With TEMPLATE-ERP, you can manage your finances, inventory, CRM, and more from a single platform.
+                        DAHLIA-CB-ERP is a cloud-based ERP solution that helps businesses of all sizes automate and streamline their operations. With TEMPLATE-ERP, you can manage your finances, inventory, CRM, and more from a single platform.
                      </p>
                      <div class="mt-8 flex flex-wrap justify-center">
                         <a href="" class="btn btn-primary text-white">
@@ -53,7 +53,7 @@
                <div class="w-full sm:max-w-md mt-6 px-12 pt-6 pb-24 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg bg-opacity-90">
                   <div class="max-w-7xl mx-auto p-6 lg:p-8">
                      <div class="flex justify-center">
-                        <h1 class="transition ease-in-out delay-150 font-semibold text-4xl text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"> TEMPLATE-ERP </h1>
+                        <h1 class="transition ease-in-out delay-150 font-semibold text-4xl text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"> DAHLIA-CB-ERP </h1>
                      </div>
                   </div>
                   {{ $slot }}

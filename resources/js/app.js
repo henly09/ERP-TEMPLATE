@@ -1,7 +1,7 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
-import {initTE, Carousel, LoadingManagement} from "tw-elements";
+import {initTE, Carousel, LoadingManagement, Sidenav, Select} from "tw-elements";
 
 window.Alpine = Alpine;
 Alpine.start();
-initTE({ Carousel,LoadingManagement });
+initTE({ Carousel,LoadingManagement, Sidenav, Select });
