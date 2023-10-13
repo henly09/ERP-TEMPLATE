@@ -11,9 +11,9 @@
         <div style="background-image: url('{{ asset('images/footerbanner.jpeg') }}'); background-size: cover; position: fixed; top: 0; width: 100%;">
             <div class="py-3 px-4 text-white flex space-x-4 items-center">
                 @if(Auth::user()->prof_pic)
-                    <img style="height: 65px; width: 65px;" src="{{ asset('storage/profile_pictures/' . Auth::user()->prof_pic) }}" alt="Profile Picture" class="bg-white rounded-full border-2 border-white">
+                    <img style="object-fit: cover; height: 65px; width: 65px;" src="{{ asset('storage/profile_pictures/' . Auth::user()->prof_pic) }}" alt="Profile Picture" class="bg-white rounded-full border-2 border-white">
                 @else
-                    <img style="height: 65px; width: 75px;" src="{{ asset('images/dummyuser.png') }}" alt="Profile Picture" class="bg-white rounded-full border-2 border-white">
+                    <img style="object-fit: cover; height: 65px; width: 75px;" src="{{ asset('images/dummyuser.png') }}" alt="Profile Picture" class="bg-white rounded-full border-2 border-white">
                 @endif
                 <div class="text-left">
                     <?php
@@ -35,36 +35,36 @@
         <!-- Sidebar content goes here -->
         <ul class="py-4 flex-1 text-left">
         @if(Auth::user()->email_verified_at)
-        @auth
-        @if(Auth::user()->role == "Admin")
-            <a href="{{ route('systemUsers.index') }}">
-                <li class=" px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
-                    <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-screwdriver-wrench pr-3"></i></i> System's Users </span>
-                </li>
-            </a>
-            @elseif (Auth::user()->role == "User")
-            <a href="{{ route('dashboard') }}">
-                <li class=" px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
-                    <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-chart-line pr-3"></i> Dashboard </span>
-                </li>
-            </a>
-            <a href="{{ route('customer.index') }}">
-                <li class=" px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
-                    <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-cart-shopping pr-3"></i></i> Customers </span>
-                </li>
-            </a>
-            <a href="{{ route('vouchreq.index') }}">
-                <li class=" px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
-                    <span class="text-black group-hover:text-white text-lg"> <i class="fa-regular fa-money-bill-1 pr-3"></i></i> Voucher Request </span>
-                </li>
-            </a>
-            <a href="{{ route('disbursement.index') }}">
-                <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
-                    <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-magnifying-glass-dollar pr-3"></i> Disbursement </span>
-                </li>
-            </a>
-        @endif
-        @endauth
+            @auth
+                @if(Auth::user()->role == "Admin")
+                    <a href="{{ route('systemUsers.index') }}">
+                        <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
+                            <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-screwdriver-wrench pr-3"></i></i> System's Users </span>
+                        </li>
+                    </a>
+                    @elseif (Auth::user()->role == "User")
+                    <a href="{{ route('dashboard') }}">
+                        <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
+                            <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-chart-line pr-3"></i> Dashboard </span>
+                        </li>
+                    </a>
+                    <a href="{{ route('customer.index') }}">
+                        <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
+                            <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-cart-shopping pr-3"></i></i> Customers </span>
+                        </li>
+                    </a>
+                    <a href="{{ route('vouchreq.index') }}">
+                        <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
+                            <span class="text-black group-hover:text-white text-lg"> <i class="fa-regular fa-money-bill-1 pr-3"></i></i> Voucher Request </span>
+                        </li>
+                    </a>
+                    <a href="{{ route('disbursement.index') }}">
+                        <li class="px-6 py-2 group transition ease-in-out duration-300 hover:bg-red-900">
+                            <span class="text-black group-hover:text-white text-lg"> <i class="fa-solid fa-magnifying-glass-dollar pr-3"></i> Disbursement </span>
+                        </li>
+                    </a>
+                @endif
+            @endauth
         @endif
         </ul>
     </div>
@@ -77,7 +77,6 @@
     </div>
 </nav>
 
-<!-- Sidenav -->
 <div class="flex-1 flex flex-col relative" id="content">
    @if (isset($header))
    <header class="bg-white dark:bg-gray-800 shadow relative shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)]">
@@ -103,9 +102,9 @@
                 <x-slot name="trigger">
                     <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover-text-gray-300 focus:outline-none transition ease-in-out duration-150">
                         @if(Auth::user()->prof_pic)
-                            <img src="{{ asset('storage/profile_pictures/' . Auth::user()->prof_pic) }}" alt="Profile Picture" class="bg-white mx-auto h-10 w-10 rounded-full border-2 border-white">
+                            <img style="object-fit: cover;" src="{{ asset('storage/profile_pictures/' . Auth::user()->prof_pic) }}" alt="Profile Picture" class="bg-white mx-auto h-10 w-10 rounded-full border-2 border-white">
                         @else
-                            <img src="{{ asset('images/dummyuser.png') }}" alt="Profile Picture" class="bg-white mx-auto h-10 w-10 rounded-full border-2 border-white">
+                            <img style="object-fit: cover;" src="{{ asset('images/dummyuser.png') }}" alt="Profile Picture" class="bg-white mx-auto h-10 w-10 rounded-full border-2 border-white">
                         @endif
                         <div class="ml-2">{{ Auth::user()->name }}</div>
                         <div class="ml-1">
@@ -142,56 +141,3 @@
       </main>
    </div>
 </div>
-<script>
-   const instanceMode = te.Sidenav.getInstance(
-   document.getElementById("sidenav-2")
-   );
-   const modes = ["push", "over", "side"];
-   
-   modes.forEach((mode) => {
-   const modeSwitch = document.getElementById(mode);
-   modeSwitch.addEventListener("click", () => {
-   const instance = te.Sidenav.getInstance(
-   document.getElementById("sidenav-2")
-   );
-   instance.changeMode(mode);
-   modes.forEach((el) => {
-   if (el === mode) {
-   ["text-primary-600", "border-primary-600"].forEach((item) =>
-     modeSwitch.classList.remove(item)
-   );
-   modeSwitch.className +=
-     " bg-primary text-white hover:bg-primary-700 active:bg-primary-800 focus:bg-primary-700 border-transparent";
-   } else {
-   const node = document.getElementById(el);
-   node.className += " text-primary-600 border-primary-600";
-   [
-     "bg-primary",
-     "text-white",
-     "hover:bg-primary-700",
-     "active:bg-primary-800",
-     "focus:bg-primary-700",
-     "border-transparent",
-   ].forEach((item) => node.classList.remove(item));
-   }
-   });
-   });
-   });
-</script>
-<style>
-   /* Add transition properties for opacity and transform */
-   #sidebar {
-   transform: translateX(-100%);
-   opacity: 0;
-   transition: transform 1.3s ease-in-out, opacity 0.3s ease-in-out;
-   }
-   #content.w-full {
-   width: calc(100% - 64px); /* Adjust for sidebar width */
-   transition: width 1.3s ease-in-out;
-   }
-   /* When the sidebar is visible, set opacity to 1 and reset the transform */
-   #sidebar:not(.hidden) {
-   transform: translateX(0);
-   opacity: 1;
-   }
-</style>

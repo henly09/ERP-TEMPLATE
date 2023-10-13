@@ -65,3 +65,18 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # ERP-TEMPLATE
+
+# Commands
+
+Laravel Framework 10.25.2
+
+Database: php artisan serve 
+Vite: npm run dev
+
+npm version: 10.1.0
+node version: v20.7.0
+
+php version: PHP 8.2.11 
+composer version: Composer version 2.6.3
+
+

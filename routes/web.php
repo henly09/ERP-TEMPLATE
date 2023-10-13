@@ -74,13 +74,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/laraview-pdf/{id}', [App\Http\Controllers\PDFController::class, 'genLaraview'])->name('vouchreq.Laraview'); // PDF Laraview
     Route::get('/loadMoreCustomers', [App\Http\Controllers\PDFController::class, 'loadMoreCustomers'])->name('vouchreq.loadMoreCustomers');
 
-
     // Disbursement not yet done 
     Route::get('/disbursement/index', [App\Http\Controllers\DisbursementController::class, 'index'])->name('disbursement.index');
     Route::get('/disbursement/create', [App\Http\Controllers\DisbursementController::class, 'create'])->name('disbursement.create');
     Route::get('/disbursement/read', [App\Http\Controllers\DisbursementController::class, 'read'])->name('disbursement.read');
     Route::delete('/disbursement/delete/{id}', [App\Http\Controllers\DisbursementController::class, 'delete'])->name('disbursement.delete');
     Route::get('/disbursement/update', [App\Http\Controllers\DisbursementController::class, 'update'])->name('disbursement.update');
+
     });
 });
 
