@@ -68,7 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/vouchreq/createSave', [App\Http\Controllers\VouchReqController::class, 'createSave'])->name('vouchreq.createSave'); // save function from create vouuchreq
     Route::delete('/vouchreq/delete/{id}', [App\Http\Controllers\VouchReqController::class, 'delete'])->name('vouchreq.delete'); // delete function in vouuchreq
     Route::get('/vouchreq/update/{id}', [App\Http\Controllers\VouchReqController::class, 'update'])->name('vouchreq.update'); // update page 
-    Route::patch('/customer/saveEdit/{id}', [App\Http\Controllers\VouchReqController::class, 'saveEdit'])->name('vouchreq.saveEdit'); // save function from edit vouuchreq
+    Route::patch('/vouchreq/saveEdit/{id}', [App\Http\Controllers\VouchReqController::class, 'saveEdit'])->name('vouchreq.saveEdit'); // save function from edit vouuchreq
     Route::get('/vouchreq/search', [App\Http\Controllers\VouchReqController::class, 'search'])->name('vouchreq.search');
     Route::get('/generate-pdf/{id}', [App\Http\Controllers\PDFController::class, 'generatePDFVoucherRequest'])->name('vouchreq.GenPDF'); // PDF Generator 1
     Route::get('/laraview-pdf/{id}', [App\Http\Controllers\PDFController::class, 'genLaraview'])->name('vouchreq.Laraview'); // PDF Laraview

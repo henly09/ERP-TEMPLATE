@@ -196,12 +196,12 @@
                 // If it is initialized, destroy it first
                 $('#basic-datatable').DataTable().destroy();
             }
-
             // Now, reinitialize the DataTable with the desired options
             $('#basic-datatable').DataTable({
                 searching: false, // Disable search
                 paging: false,    // Disable pagination
                 info: false,  
+                order: [[0, 'desc']]
             });
         });
 

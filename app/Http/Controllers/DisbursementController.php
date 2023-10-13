@@ -10,7 +10,7 @@ class DisbursementController extends Controller
 {
     public function index(){
 
-        $disbursements = Disbursement::paginate(10);
+        $disbursements = Disbursement::orderBy('id', 'desc')->paginate(10);
         $customerIds = $disbursements->pluck('cust_id')->toArray();
         $vouchIDs = $disbursements->pluck('vouch_id')->toArray();
 
@@ -54,6 +54,7 @@ class DisbursementController extends Controller
         $disbursements = Disbursement::where('total_amount', 'like', '%' . $query . '%')
                 ->orWhere('bank_balance', 'like', '%' . $query . '%')
                 ->orWhere('dis_per_dccr', 'like', '%' . $query . '%')
+                ->orderBy('id', 'desc')
                 ->paginate(10);
 
         $customerIds = $disbursements->pluck('cust_id')->toArray();

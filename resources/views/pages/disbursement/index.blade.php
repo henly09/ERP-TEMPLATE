@@ -211,6 +211,7 @@
                 searching: false, // Disable search
                 paging: false,    // Disable pagination
                 info: false,  
+                order: [[0, 'desc']] 
             });
         });
 

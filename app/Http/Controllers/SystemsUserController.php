@@ -18,7 +18,7 @@ use Illuminate\View\View;
 class SystemsUserController extends Controller
 {
     public function index(){
-        $users = User::paginate(10); // You can adjust the number of records per page (e.g., 10)
+        $users = User::orderBy('id', 'desc')->paginate(10); // You can adjust the number of records per page (e.g., 10)
         return view('pages.sysuser.index', ['users' => $users]);
     }
 
@@ -110,6 +110,7 @@ class SystemsUserController extends Controller
         $users = User::where('name', 'like', '%' . $query . '%')
                             ->orWhere('email', 'like', '%' . $query . '%')
                             ->orWhere('role', 'like', '%' . $query . '%')
+                            ->orderBy('id', 'desc')
                             ->paginate(10);
 
         // Return the search results to a view or do something else with the results

@@ -8,13 +8,14 @@ class CustomersController extends Controller
 {
     public function index(){
 
-        $customers = Customers::paginate(10); // You can adjust the number of records per page (e.g., 10)
+        $customers = Customers::orderBy('id', 'desc')->paginate(10);
         return view('pages.customers.index', ['customers' => $customers]);
 
     }
 
     public function create(){
         return view('pages.customers.create');
+        
     }
 
     public function createSave(Request $request){
@@ -29,6 +30,8 @@ class CustomersController extends Controller
         ]);
 
         $customer = Customers::create($validatedData);
+
+        
         return redirect()->action([CustomersController::class, 'index']);
     }
 
@@ -48,6 +51,7 @@ class CustomersController extends Controller
            $customers = Customers::where('name', 'like', '%' . $query . '%')
                                ->orWhere('email', 'like', '%' . $query . '%')
                                ->orWhere('address', 'like', '%' . $query . '%')
+                               ->orderBy('id', 'desc')
                                ->paginate(10);
    
            // Return the search results to a view or do something else with the results

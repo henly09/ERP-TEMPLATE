@@ -61,7 +61,6 @@
         <!-- Morris Custom Js-->
         <script src="{{ asset('/pages/dashboard-demo.js') }}"></script>
 
-
         <!-- PDF Viewer -->
         <script src="{{ asset('pdfjs-3.11.174-dist/build/pdf.js') }}"></script>
 
@@ -73,6 +72,7 @@
     </head>
     <body class="font-sans antialiased">
         @include('layouts.navigation')
+
     </body>
 
 </html>

@@ -10,7 +10,7 @@ class VouchReqController extends Controller
         public function index(){
 
         // Paginate the Vouchreqs table
-        $vouchreqs = Vouchreqs::paginate(10);
+        $vouchreqs = Vouchreqs::orderBy('id', 'desc')->paginate(10);
 
         // Get the customer IDs from the paginated Vouchreqs
         $customerIds = $vouchreqs->pluck('cust_id')->toArray();
@@ -82,6 +82,7 @@ class VouchReqController extends Controller
          $vouchreqs = Vouchreqs::where('requested_by', 'like', '%' . $query . '%')
                              ->orWhere('check_by', 'like', '%' . $query . '%')
                              ->orWhere('particulars', 'like', '%' . $query . '%')
+                             ->orderBy('id', 'desc')
                              ->paginate(10);
 
           // Get the customer IDs from the paginated Vouchreqs
