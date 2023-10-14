@@ -181,16 +181,18 @@
                 </div><!-- end col-->
             </div>
             <!-- end row-->
-            <!-- // Not Done Yet   -->     
+            <!-- // Not Done Yet   --> 
+            <!-- <div id="pdf-container"></div> -->
+
+            <!-- Add zoom in and zoom out buttons -->
+            <!-- <button id="zoomInButton">Zoom In</button> -->
+            <!-- <button id="zoomOutButton">Zoom Out</button> -->
+      
     </div>
 
     <script>
         $(document).ready(function() {
             // Check if the DataTable is already initialized
-            if ($.fn.DataTable.isDataTable('#basic-datatable')) {
-                // If it is initialized, destroy it first
-                $('#basic-datatable').DataTable().destroy();
-            }
             // Now, reinitialize the DataTable with the desired options
             $('#basic-datatable').DataTable({
                 searching: false, // Disable search
@@ -219,6 +221,7 @@
         document.getElementById('delete-customer-form').addEventListener('submit', function (event) {
             event.preventDefault();
         });
+
 
 </script>
 
