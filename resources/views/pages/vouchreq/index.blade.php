@@ -141,6 +141,7 @@
                                                                 role="status"></div>
                                                             </div>
                                                             <iframe class="myIframe" width="800px" height="500px"></iframe>
+                                                            
                                                         </div>
                                                       </div>
                                                       <div class="d-flex justify-content-end mt-3 ">
@@ -171,10 +172,10 @@
                                        <i class="fa-solid fa-pencil"></i>
                                        </button>
                                     </form>
-                                    <form class="pl-2" action="{{ route('vouchreq.delete', ['id' => $vouchreq->id]) }}" method="POST">
+                                    <form id="delete-customer-form" class="pl-2" action="{{ route('vouchreq.delete', ['id' => $vouchreq->id]) }}" method="POST">
                                        @csrf
                                        @method('DELETE')
-                                       <button type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded">
+                                       <button id="delete-customer-button" type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded">
                                        <i class="fa-solid fa-trash"></i>
                                        </button>
                                     </form>
@@ -227,10 +228,6 @@
          });
       });
 
-
-
-      //////////////////////////////// PDF PROBLEM
-
       $(document).ready(function() {
             // Check if the DataTable is already initialized
             if ($.fn.DataTable.isDataTable('#basic-datatable')) {
@@ -245,6 +242,26 @@
                 info: false,  
                 order: [[0, 'desc']] 
             });
+        });
+
+        document.getElementById('delete-customer-button').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Submit Form?',
+                text: 'Are you sure you want to delete this user?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff0000',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-customer-form').submit();
+                }
+            });
+        });
+
+        document.getElementById('delete-customer-form').addEventListener('submit', function (event) {
+            event.preventDefault();
         });
       
 

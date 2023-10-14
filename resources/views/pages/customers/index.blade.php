@@ -15,12 +15,12 @@
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
                                     <!-- Search Bar -->
                                     <form class="form-inline my-2 my-lg-0 flex-fill" method="GET" action="{{ route('customer.search') }}">
-                                    @csrf
+                                        @csrf
                                         <div class="form-group flex-fill">
                                             <input value="{{ isset($queried) ? $queried : null }}" type="text" name="search" class="form-control flex-fill rounded-lg" placeholder="Search customers...">
                                         </div>
-                                        <button type="submit" class="bg-blue-500 text-white font-bold py-2.5 px-4 ml-2 rounded-lg">
-                                        <i class="fa-solid fa-magnifying-glass"></i>Search
+                                        <button type="submit" id="submit-button" class="bg-blue-500 text-white font-bold py-2.5 px-4 ml-2 rounded-lg">
+                                            <i class="fa-solid fa-magnifying-glass"></i>Search
                                         </button>
                                     </form>
 
@@ -156,10 +156,10 @@
                                                 </button>
                                             </form>
 
-                                            <form action="{{ route('customer.delete', ['id' => $customer->id]) }}" method="POST">
+                                            <form id="delete-customer-form" action="{{ route('customer.delete', ['id' => $customer->id]) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded">
+                                                <button id="delete-customer-button" type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded">
                                                 <i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </form>
@@ -181,15 +181,10 @@
                 </div><!-- end col-->
             </div>
             <!-- end row-->
-            <!-- // Not Done Yet   -->
-                                         
+            <!-- // Not Done Yet   -->     
     </div>
 
     <script>
-        function navigateToRoute(url) {
-            window.location.href = url; // Replace with the actual route or URL
-        }
-
         $(document).ready(function() {
             // Check if the DataTable is already initialized
             if ($.fn.DataTable.isDataTable('#basic-datatable')) {
@@ -203,6 +198,26 @@
                 info: false,  
                 order: [[0, 'desc']]
             });
+        });
+  
+        document.getElementById('delete-customer-button').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Submit Form?',
+                text: 'Are you sure you want to delete this customer?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff0000',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-customer-form').submit();
+                }
+            });
+        });
+
+        document.getElementById('delete-customer-form').addEventListener('submit', function (event) {
+            event.preventDefault();
         });
 
 </script>

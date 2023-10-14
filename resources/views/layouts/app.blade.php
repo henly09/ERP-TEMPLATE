@@ -69,6 +69,9 @@
             'resources/css/app.css', 
             'resources/js/app.js'])
 
+        <!-- My JS Swal Script -->
+        <script src="{{ asset('js/swal.js') }}"></script>
+
     </head>
     <body class="font-sans antialiased">
         @include('layouts.navigation')

@@ -132,8 +132,7 @@
 
         createVouchForm.addEventListener("submit", function(event){
             event.preventDefault();
-            displayValue();
-            createVouchForm.submit(); 
+            swal();
         });
         
         function displayValue() {
@@ -141,6 +140,23 @@
             const inputValue = parseInt(amountInput.value.replace(/[₱,]/g, ''));
             const numericValueInput = document.getElementById("amount");
             numericValueInput.value = inputValue;
+        }
+
+        function swal(){
+            Swal.fire({
+                title: 'Submit Form?',
+                text: 'Are you sure you want to save this voucher request details?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff0000',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    displayValue();
+                    createVouchForm.submit(); 
+                }
+            });
         }
 
         function displayValue2() {

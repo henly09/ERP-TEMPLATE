@@ -221,10 +221,10 @@
                                                 </button>
                                             </form>
                                         @else
-                                            <form action="{{ route('systemUsers.delete', ['id' => $user->id]) }}" method="POST">
+                                            <form id="delete-customer-form" action="{{ route('systemUsers.delete', ['id' => $user->id]) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded">
+                                                <button id="delete-customer-button" type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded">
                                                 <i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </form>
@@ -253,18 +253,13 @@
     </div>
 
     <script>
-        function navigateToRoute(url) {
-            window.location.href = url; // Replace with the actual route or URL
-        }
+
+     
 
         $(document).ready(function() {
-            // Check if the DataTable is already initialized
             if ($.fn.DataTable.isDataTable('#basic-datatable')) {
-                // If it is initialized, destroy it first
                 $('#basic-datatable').DataTable().destroy();
             }
-
-            // Now, reinitialize the DataTable with the desired options
             $('#basic-datatable').DataTable({
                 searching: false, // Disable search
                 paging: false,    // Disable pagination
@@ -273,6 +268,17 @@
             });
         });
 
+        document.getElementById('delete-customer-button').addEventListener('click', function() {
+            Swal.fire(window.swals_alerts.deleteSwal).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-customer-form').submit();
+                }
+            });
+        });
+
+        document.getElementById('delete-customer-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+        });
 </script>
 
 

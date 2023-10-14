@@ -16,7 +16,9 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "jquery": "^3.7.1",
         "leaflet": "^1.9.4",
+        "sweetalert2": "^11.7.32",
         "tw-elements": "^1.0.0"
     }
 }

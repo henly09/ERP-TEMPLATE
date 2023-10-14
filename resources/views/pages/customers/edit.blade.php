@@ -12,7 +12,7 @@
                 <h1 class="text-3xl font-bold pt-4 pb-2 px-4">Edit Customer</h1>
                 <h6 class="font-italic px-4"> Edit this form for the existing customer....</h6>
                 <div class="flex justify-center py-5">
-                <form class="w-full max-w-5xl" action="{{ route('customer.saveEdit', ['id' => $customer->id])}}" method="POST">
+                <form id="edit-customer-form" class="w-full max-w-5xl" action="{{ route('customer.saveEdit', ['id' => $customer->id])}}" method="POST">
                 @csrf
                 @method('PATCH')
                 <div class="flex justify-center">
@@ -39,7 +39,7 @@
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="contact_Num">
                             Contact Number
                         </label>
-                        <input value="{{$customer->contact_Num}}" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="contact_Num"  name="contact_Num" type="number" placeholder="+09123456789" required>
+                        <input value="{{$customer->contact_Num}}" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="contact_Num"  name="contact_Num" type="text" placeholder="+09123456789" required>
                         </div>
                     </div>
                     <div class="flex flex-grow -mx-3 mb-6">
@@ -84,6 +84,7 @@
                         <i class="fa-solid fa-xmark mr-2"></i>Cancel
                         </button>
                         <button
+                            id="edit-customer-button"
                             type="submit"
                             class="flex-wrap px-10 py-4 bg-green-500 hover:bg-green-600 text-white font-medium uppercase rounded-3xl shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-400 ml-2"
                         >
@@ -96,4 +97,27 @@
             </div>
         </div>
     </div>
+
+<script>
+        document.getElementById('edit-customer-button').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Submit Form?',
+                text: 'Are you sure you want to save this customer details?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff0000',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('edit-customer-form').submit();
+                }
+            });
+        });
+
+        document.getElementById('edit-customer-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+        });
+</script>
+
 </x-app-layout>

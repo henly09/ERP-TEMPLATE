@@ -13,7 +13,7 @@
 
                         <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <!-- Search Bar {{ route('customer.search') }} -->
+                                   
                                     <form class="form-inline my-2 my-lg-0 flex-fill" method="GET" action="">
                                     @csrf
                                         <div class="form-group flex-fill">
@@ -23,11 +23,11 @@
                                         <i class="fa-solid fa-magnifying-glass"></i>Search
                                         </button>
                                     </form>
-                                    <!-- {{ route('customer.create') }} -->
+                                    
                                     <a href="" class="btn btn-primary mb-0 font-size-14 ml-5 py-2.5"><i class="feather-plus"></i> Add Disbursement</a>
                                 </div>
                             </div>
-                            <!-- dt-responsive put in class for options -->
+                            
                             <table id="basic-datatable"class="table table-hover mb-0 nowrap">
                             <thead class="text-center align-middle">
                                 <tr>
@@ -71,13 +71,13 @@
                                             <div class="modal fade" id="myModal{{ $disbursement->id }}">
                                                 <div class="modal-dialog modal-xl modal-dialog-centered">
                                                     <div class="modal-content">
-                                                        <!-- Modal Header -->
+                                                        
                                                         <div class="modal-header">
                                                             <h2 class="modal-title text-2xl font-bold">Disbursement Information</h4>
-                                                            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                                                           
                                                         </div>
                                                         
-                                                        <!-- Modal body -->
+                                                        
                                                     <div class="modal-body">
                                                         <div class="col-12">
                                                             <div class="card">
@@ -157,18 +157,18 @@
                                         </div>
                                         
                                         <div class="flex justify-between">
-                                        <!-- {{ route('customer.update', ['id' => $disbursement->id]) }} -->
+                                       
                                             <form action="" method="GET">
                                                 @csrf
                                                 <button type="submit" class="bg-green-500 text-white font-bold py-2 px-4 rounded">
                                                     <i class="fa-solid fa-pencil"></i>
                                                 </button>
                                             </form>
-                                        <!-- {{ route('customer.delete', ['id' => $disbursement->id]) }} -->
-                                            <form action="{{ route('disbursement.delete' , ['id' => $disbursement->id]) }}" method="POST">
+                                       
+                                            <form id="delete-customer-form" action="{{ route('disbursement.delete' , ['id' => $disbursement->id]) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded">
+                                                <button id="delete-customer-button" type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded">
                                                 <i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </form>
@@ -195,9 +195,6 @@
     </div>
 
     <script>
-        function navigateToRoute(url) {
-            window.location.href = url; // Replace with the actual route or URL
-        }
 
         $(document).ready(function() {
             // Check if the DataTable is already initialized
@@ -213,6 +210,27 @@
                 info: false,  
                 order: [[0, 'desc']] 
             });
+        });
+
+
+        document.getElementById('delete-customer-button').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Submit Form?',
+                text: 'Are you sure you want to delete this disbursement?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff0000',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-customer-form').submit();
+                }
+            });
+        });
+
+        document.getElementById('delete-customer-form').addEventListener('submit', function (event) {
+            event.preventDefault();
         });
 
 </script>
