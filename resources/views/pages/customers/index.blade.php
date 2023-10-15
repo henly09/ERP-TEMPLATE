@@ -180,9 +180,12 @@
                     </div> <!-- end card -->
                 </div><!-- end col-->
             </div>
+            <!-- HAHAHAHA NAKUHA NA TANG INA MO -->
+            <!-- <iframe src="{{ asset('pdfjs-3.11.174-dist/web/viewer.html') }}?file={{ asset('123.pdf') }}" width="100%" height="600px"></iframe> -->
     </div>
 
     <script>
+
         $(document).ready(function() {
             $('#basic-datatable').DataTable({
                 searching: false, // Disable search
