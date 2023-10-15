@@ -180,20 +180,10 @@
                     </div> <!-- end card -->
                 </div><!-- end col-->
             </div>
-            <!-- end row-->
-            <!-- // Not Done Yet   --> 
-            <!-- <div id="pdf-container"></div> -->
-
-            <!-- Add zoom in and zoom out buttons -->
-            <!-- <button id="zoomInButton">Zoom In</button> -->
-            <!-- <button id="zoomOutButton">Zoom Out</button> -->
-      
     </div>
 
     <script>
         $(document).ready(function() {
-            // Check if the DataTable is already initialized
-            // Now, reinitialize the DataTable with the desired options
             $('#basic-datatable').DataTable({
                 searching: false, // Disable search
                 paging: false,    // Disable pagination
@@ -203,15 +193,7 @@
         });
   
         document.getElementById('delete-customer-button').addEventListener('click', function() {
-            Swal.fire({
-                title: 'Submit Form?',
-                text: 'Are you sure you want to delete this customer?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#ff0000',
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No',
-            }).then((result) => {
+            Swal.fire(window.swals_alerts.deleteSwal).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('delete-customer-form').submit();
                 }
@@ -221,7 +203,6 @@
         document.getElementById('delete-customer-form').addEventListener('submit', function (event) {
             event.preventDefault();
         });
-
 
 </script>
 

@@ -214,15 +214,7 @@
 
 
         document.getElementById('delete-customer-button').addEventListener('click', function() {
-            Swal.fire({
-                title: 'Submit Form?',
-                text: 'Are you sure you want to delete this disbursement?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#ff0000',
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No',
-            }).then((result) => {
+            Swal.fire(window.swals_alerts.deleteSwal).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('delete-customer-form').submit();
                 }

@@ -33,8 +33,6 @@
         <script src="{{ asset('js/metismenu.min.js') }} "></script>
         <script src="{{ asset('js/waves.js') }} "></script>
         <script src="{{ asset('js/simplebar.min.js') }} "></script>
-        <script src="{{ asset('js/jquery-3.6.0.js') }} "></script>
-        <script src="{{ asset('js/jquery-3.6.0.min.js') }} "></script>
         <script src="{{ asset('js/jquery.inputmask.min.js') }} "></script>
         <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('plugins/datatables/dataTables.bootstrap4.js') }}"></script>
@@ -50,9 +48,6 @@
         <script src="{{ asset('plugins/datatables/pdfmake.min.js') }}"></script>
         <script src="{{ asset('plugins/datatables/vfs_fonts.js') }}"></script>
         
-
-        <script src="{{ asset('pages/datatables-demo.js')}}"></script>
-
         <!-- Morris Js-->
         <script src="{{ asset('plugins/morris-js/morris.min.js') }}"></script>
         <!-- Raphael Js-->
@@ -61,13 +56,13 @@
         <!-- Morris Custom Js-->
         <script src="{{ asset('/pages/dashboard-demo.js') }}"></script>
 
-        <!-- PDF Viewer -->
-        <script src="{{ asset('pdfjs-3.11.174-dist/build/pdf.js') }}"></script>
-
         <!-- Scripts -->
         @vite([
             'resources/css/app.css', 
             'resources/js/app.js'])
+
+        <!-- PDF import  -->
+        <script src="{{ asset('public/pdfjs/build/pdf.js') }}"></script>
 
         <!-- My JS Swal Script -->
         <script src="{{ asset('js/swal.js') }}"></script>

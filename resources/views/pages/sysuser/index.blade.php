@@ -254,8 +254,6 @@
 
     <script>
 
-     
-
         $(document).ready(function() {
             if ($.fn.DataTable.isDataTable('#basic-datatable')) {
                 $('#basic-datatable').DataTable().destroy();
