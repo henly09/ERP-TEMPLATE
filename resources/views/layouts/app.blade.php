@@ -56,8 +56,6 @@
         <!-- Morris Custom Js-->
         <script src="{{ asset('/pages/dashboard-demo.js') }}"></script>
 
-
-
         <!-- Scripts -->
         @vite([
             'resources/css/app.css', 
