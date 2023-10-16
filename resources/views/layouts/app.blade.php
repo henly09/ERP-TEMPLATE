@@ -56,13 +56,12 @@
         <!-- Morris Custom Js-->
         <script src="{{ asset('/pages/dashboard-demo.js') }}"></script>
 
+
+
         <!-- Scripts -->
         @vite([
             'resources/css/app.css', 
-            'resources/js/app.js'])
-
-        <!-- PDF import  -->
-        <script src="{{ asset('public/pdfjs/build/pdf.js') }}"></script>
+            'resources/js/app.js'])  
 
         <!-- My JS Swal Script -->
         <script src="{{ asset('js/swal.js') }}"></script>
@@ -70,7 +69,6 @@
     </head>
     <body class="font-sans antialiased">
         @include('layouts.navigation')
-
     </body>
 
 </html>

@@ -140,8 +140,8 @@
                                                                 class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent motion-reduce:animate-[spin_1.5s_linear_infinite]"
                                                                 role="status"></div>
                                                             </div>
+                                                           
                                                             <iframe class="myIframe" width="800px" height="500px"></iframe>
-                                                            
                                                         </div>
                                                       </div>
                                                       <div class="d-flex justify-content-end mt-3 ">
@@ -188,7 +188,7 @@
                   </table>
                   <!-- Search Results -->
                   @if($vouchreqs->count() > 0)
-                  {{ $vouchreqs->links() }} <!-- Display pagination links -->
+                     {{ $vouchreqs->links() }} <!-- Display pagination links -->
                   @else
                   <p>No results found.</p>
                   @endif
@@ -211,34 +211,23 @@
          // When a vouchreq-row is clicked
          $('.vouchreq-row').on('click', function() {
             var vouchreqRoute = $(this).data('route');
-
-            // Set the src of the corresponding iframe
             var iframe = $(this).closest('tr').find('.myIframe');
+            vouchreqRoute = "{{ asset('pdfjs-3.11.174-dist/web/viewer.html') }}?file=".concat(vouchreqRoute);
             iframe.attr('src', vouchreqRoute);
-
-            // Show the loading message for the specific iframe
             loadingMessages.hide();
             $(this).closest('tr').find('.loadingMessage').show();
          });
 
          iframes.on('load', function() {
             console.log('An iframe has finished loading.');
-            // Hide the loading message for the specific iframe
             $(this).closest('tr').find('.loadingMessage').hide();
          });
       });
 
       $(document).ready(function() {
-            // Check if the DataTable is already initialized
-            if ($.fn.DataTable.isDataTable('#basic-datatable')) {
-                // If it is initialized, destroy it first
-                $('#basic-datatable').DataTable().destroy();
-            }
-
-            // Now, reinitialize the DataTable with the desired options
             $('#basic-datatable').DataTable({
-                searching: false, // Disable search
-                paging: false,    // Disable pagination
+                searching: false, 
+                paging: false,    
                 info: false,  
                 order: [[0, 'desc']] 
             });
